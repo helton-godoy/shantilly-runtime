@@ -1,0 +1,75 @@
+{
+  "autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"],
+    "environments": {
+      "vscode": {
+        "enabled": true,
+        "configPath": ".vscode/settings.json",
+        "settings": {
+          "aion.autonomy.safeAutoRun": true,
+          "aion.autonomy.confirmDangerous": true,
+          "aion.autonomy.allowedOperations": ["create", "edit", "build", "test", "git"]
+        }
+      },
+      "cursor": {
+        "enabled": true,
+        "configPath": ".cursor/settings.json",
+        "settings": {
+          "aion.autonomy.safeAutoRun": true,
+          "aion.autonomy.confirmDangerous": true,
+          "aion.autonomy.allowedOperations": ["create", "edit", "build", "test", "git"]
+        }
+      },
+      "windsurf": {
+        "enabled": true,
+        "configPath": ".windsurf/settings.json",
+        "settings": {
+          "aion.autonomy.safeAutoRun": true,
+          "aion.autonomy.confirmDangerous": true,
+          "aion.autonomy.allowedOperations": ["create", "edit", "build", "test", "git"]
+        }
+      },
+      "claude": {
+        "enabled": true,
+        "configPath": ".claude/settings.json",
+        "settings": {
+          "aion.autonomy.safeAutoRun": true,
+          "aion.autonomy.confirmDangerous": true,
+          "aion.autonomy.allowedOperations": ["create", "edit", "build", "test", "git"]
+        }
+      },
+      "github-copilot": {
+        "enabled": true,
+        "configPath": ".github/copilot/settings.json",
+        "settings": {
+          "aion.autonomy.safeAutoRun": true,
+          "aion.autonomy.confirmDangerous": true,
+          "aion.autonomy.allowedOperations": ["create", "edit", "build", "test", "git"]
+        }
+      },
+      "terminal": {
+        "enabled": true,
+        "configType": "environment",
+        "variables": {
+          "AION_AUTONOMY_SAFE": "true",
+          "AION_CONFIRM_DANGEROUS": "true",
+          "AION_ALLOWED_OPERATIONS": "create,edit,build,test,git"
+        }
+      }
+    }
+  },
+  "project": {
+    "name": "shantilly-runtime",
+    "type": "tui-runtime",
+    "framework": "aion",
+    "version": "1.0.0-alpha"
+  },
+  "development": {
+    "autoCommit": true,
+    "autoPush": true,
+    "autoTest": true,
+    "autoDocument": true
+  }
+}

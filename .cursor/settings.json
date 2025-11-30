@@ -1,0 +1,12 @@
+{
+  "aion.autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"]
+  },
+  "aion.project": {
+    "name": "shantilly-runtime",
+    "type": "tui-runtime",
+    "framework": "aion"
+  }
+}
