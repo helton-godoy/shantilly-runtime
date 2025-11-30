@@ -3,14 +3,43 @@ package app
 import (
 	"fmt"
 
+	tea "github.com/charmbracelet/bubbletea"
 	"github.com/helton-godoy/shantilly-runtime/pkg/config"
+	"github.com/helton-godoy/shantilly-runtime/pkg/runtime"
 	"github.com/spf13/cobra"
 )
 
 // runApp executes the TUI application
 func runApp(configFile string, cmd *cobra.Command) error {
-	// TODO: Implement after creating config and runtime packages
-	return fmt.Errorf("runtime not implemented yet - this is a placeholder")
+	// Load configuration
+	cfg, err := config.LoadFromFile(configFile)
+	if err != nil {
+		return fmt.Errorf("failed to load configuration: %w", err)
+	}
+
+	// Validate configuration
+	if err := cfg.Validate(); err != nil {
+		return fmt.Errorf("invalid configuration: %w", err)
+	}
+
+	// Get debug flag
+	debug, _ := cmd.Flags().GetBool("debug")
+	verbose, _ := cmd.Flags().GetBool("verbose")
+
+	// Create runtime
+	rt := runtime.New(cfg, runtime.Options{
+		Debug:   debug,
+		Verbose: verbose,
+	})
+
+	// Create and start Bubbletea program
+	p := tea.NewProgram(rt, tea.WithAltScreen())
+
+	if _, err := p.Run(); err != nil {
+		return fmt.Errorf("failed to start TUI: %w", err)
+	}
+
+	return nil
 }
 
 // validateConfig validates a YAML configuration file

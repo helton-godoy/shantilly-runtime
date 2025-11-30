@@ -1,0 +1,15 @@
+app:
+  name: "Test Runtime"
+  version: "1.0.0"
+
+layout:
+  type: "vertical"
+  components:
+    - type: "text"
+      content: "Hello, Shantilly Runtime!"
+      style: "bold"
+    
+    - type: "button"
+      id: "test-btn"
+      content: "Click Me"
+
