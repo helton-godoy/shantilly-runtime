@@ -2,82 +2,20 @@ package app
 
 import (
 	"fmt"
-	"os"
 
-	tea "github.com/charmbracelet/bubbletea"
-	"github.com/helton-godoy/shantilly-runtime/internal/config"
-	"github.com/helton-godoy/shantilly-runtime/internal/runtime"
 	"github.com/spf13/cobra"
 )
 
 // runApp executes the TUI application
 func runApp(configFile string, cmd *cobra.Command) error {
-	// Check if file exists
-	if _, err := os.Stat(configFile); os.IsNotExist(err) {
-		return fmt.Errorf("configuration file not found: %s", configFile)
-	}
-
-	// Load configuration
-	cfg, err := config.LoadFromFile(configFile)
-	if err != nil {
-		return fmt.Errorf("failed to load configuration: %w", err)
-	}
-
-	// Validate configuration
-	if err := config.Validate(cfg); err != nil {
-		return fmt.Errorf("invalid configuration: %w", err)
-	}
-
-	// Get debug flag
-	debug, _ := cmd.Flags().GetBool("debug")
-	verbose, _ := cmd.Flags().GetBool("verbose")
-
-	// Create runtime
-	rt := runtime.New(cfg, runtime.Options{
-		Debug:   debug,
-		Verbose: verbose,
-	})
-
-	// Create and start Bubbletea program
-	p := tea.NewProgram(rt, tea.WithAltScreen())
-
-	if _, err := p.Run(); err != nil {
-		return fmt.Errorf("failed to start TUI: %w", err)
-	}
-
-	return nil
+	// TODO: Implement after creating config and runtime packages
+	return fmt.Errorf("runtime not implemented yet - this is a placeholder")
 }
 
 // validateConfig validates a YAML configuration file
 func validateConfig(configFile string, cmd *cobra.Command) error {
-	// Check if file exists
-	if _, err := os.Stat(configFile); os.IsNotExist(err) {
-		return fmt.Errorf("configuration file not found: %s", configFile)
-	}
-
-	// Load configuration
-	cfg, err := config.LoadFromFile(configFile)
-	if err != nil {
-		return fmt.Errorf("failed to load configuration: %w", err)
-	}
-
-	// Validate configuration
-	if err := config.Validate(cfg); err != nil {
-		return fmt.Errorf("invalid configuration: %w", err)
-	}
-
-	fmt.Printf("✅ Configuration file '%s' is valid\n", configFile)
-
-	// Show configuration summary if verbose
-	verbose, _ := cmd.Flags().GetBool("verbose")
-	if verbose {
-		fmt.Printf("📋 Configuration summary:\n")
-		fmt.Printf("   App: %s v%s\n", cfg.App.Name, cfg.App.Version)
-		fmt.Printf("   Layout: %s\n", cfg.Layout.Type)
-		fmt.Printf("   Components: %d\n", len(cfg.Layout.Components))
-	}
-
-	return nil
+	// TODO: Implement after creating config package
+	return fmt.Errorf("config validation not implemented yet - this is a placeholder")
 }
 
 // showExamples displays example configurations
