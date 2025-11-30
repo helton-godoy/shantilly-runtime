@@ -21,6 +21,109 @@
 - Operações de sistema críticas
 - Comandos com senhas/tokens sensíveis
 
+---
+
+## 🌍 **SUPORTE MULTI-AMBIENTE**
+
+### **🎯 Ambientes Suportados**
+- **VS Code** - Configuração `.vscode/settings.json`
+- **Cursor** - Configuração `.cursor/settings.json`
+- **Windsurf** - Configuração `.windsurf/settings.json`
+- **Claude Code** - Configuração `.claude/settings.json`
+- **GitHub Copilot** - Configuração `.github/copilot/settings.json`
+- **Terminal/CLI** - Configuração via variáveis de ambiente
+
+### **🔧 Configuração por Ambiente**
+
+#### **VS Code**
+```json
+{
+  "aion.autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"]
+  }
+}
+```
+
+#### **Cursor**
+```json
+{
+  "aion.autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"]
+  }
+}
+```
+
+#### **Windsurf**
+```json
+{
+  "aion.autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"]
+  }
+}
+```
+
+#### **Claude Code**
+```json
+{
+  "aion.autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"]
+  }
+}
+```
+
+#### **Terminal/CLI**
+```bash
+# Variáveis de ambiente
+export AION_AUTONOMY_SAFE=true
+export AION_CONFIRM_DANGEROUS=true
+export AION_ALLOWED_OPERATIONS="create,edit,build,test,git"
+```
+
+### **🔍 Detecção Automática de Ambiente**
+
+O AION deve detectar automaticamente o ambiente:
+```javascript
+function detectEnvironment() {
+  if (fs.existsSync('.vscode/settings.json')) return 'vscode';
+  if (fs.existsSync('.cursor/settings.json')) return 'cursor';
+  if (fs.existsSync('.windsurf/settings.json')) return 'windsurf';
+  if (fs.existsSync('.claude/settings.json')) return 'claude';
+  if (fs.existsSync('.github/copilot/settings.json')) return 'github-copilot';
+  return 'terminal';
+}
+```
+
+### **⚙️ Configuração Unificada**
+
+Criar arquivo `.aion/config.json`:
+```json
+{
+  "autonomy": {
+    "safeAutoRun": true,
+    "confirmDangerous": true,
+    "allowedOperations": ["create", "edit", "build", "test", "git"],
+    "environments": {
+      "vscode": { "enabled": true },
+      "cursor": { "enabled": true },
+      "windsurf": { "enabled": true },
+      "claude": { "enabled": true },
+      "github-copilot": { "enabled": true },
+      "terminal": { "enabled": true }
+    }
+  }
+}
+```
+
+---
+
 ## 🚀 **Implementação**
 
 ### **SafeToAutoRun: true** para:

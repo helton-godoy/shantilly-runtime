@@ -3,6 +3,7 @@ package app
 import (
 	"fmt"
 
+	"github.com/helton-godoy/shantilly-runtime/pkg/config"
 	"github.com/spf13/cobra"
 )
 
@@ -14,8 +15,26 @@ func runApp(configFile string, cmd *cobra.Command) error {
 
 // validateConfig validates a YAML configuration file
 func validateConfig(configFile string, cmd *cobra.Command) error {
-	// TODO: Implement after creating config package
-	return fmt.Errorf("config validation not implemented yet - this is a placeholder")
+	// Load configuration
+	cfg, err := config.LoadFromFile(configFile)
+	if err != nil {
+		return fmt.Errorf("failed to load configuration: %w", err)
+	}
+
+	// Validate configuration
+	if err := cfg.Validate(); err != nil {
+		return fmt.Errorf("invalid configuration: %w", err)
+	}
+
+	fmt.Printf("✅ Configuration file '%s' is valid\n", configFile)
+
+	// Show configuration summary if verbose
+	verbose, _ := cmd.Flags().GetBool("verbose")
+	if verbose {
+		fmt.Printf("%s", cfg.GetConfigSummary())
+	}
+
+	return nil
 }
 
 // showExamples displays example configurations
